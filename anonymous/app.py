@@ -35,7 +35,7 @@ def create_app(config):
     views.register_views(app)
 
     # DB connection
-    app.db_engine = create_engine(app.config['DB'])
+    app.db_engine = create_engine(app.config['DATABASE'])
     m.Base.metadata.bind = app.db_engine
     m.Session.configure(bind=app.db_engine)
 
