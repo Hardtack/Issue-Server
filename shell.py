@@ -10,8 +10,9 @@ def shell():
         'DATABASE':{
             'DB':'postgresql',
             'DRIVER':'psycopg2',
-            'NAME':'postgres',
-            'USER':'postgres',
+            'NAME':'issue',
+            'USER':'issue',
+            'PASSWORD':'issue',
         }
     })
     session = m.Session()

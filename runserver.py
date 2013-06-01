@@ -7,8 +7,9 @@ if __name__ == '__main__':
         'DATABASE':{
             'DB':'postgresql',
             'DRIVER':'psycopg2',
-            'NAME':'postgres',
-            'USER':'postgres',
+            'NAME':'issue',
+            'USER':'issue',
+            'PASSWORD':'issue',
         }
     })
     app.run(host='0.0.0.0', port=8080)
