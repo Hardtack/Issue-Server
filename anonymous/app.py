@@ -1,12 +1,13 @@
 import views
 import collections
 import models as m
+from auth import auth_blueprint
 from flask import Flask
 from contrib.ext.sqlalchemy_ext import create_engine
 from contrib.middlewares.sqlalchemymiddleware import SQLAlchemyMiddleware
 
 class App(Flask):
-    """Base Flask app for CAUCSE API
+    """Base Flask app for Issue tracker API
     """
     pass
 
@@ -29,6 +30,9 @@ def create_app(config):
     app.db_engine = create_engine(app.config['DB'])
     m.Base.metadata.bind = app.db_engine
     m.Session.configure(bind=app.db_engine)
+
+    # Auth
+    app.register_blueprint(auth_blueprint)
 
     # Middlewares
     SQLAlchemyMiddleware(m.Session, app)
