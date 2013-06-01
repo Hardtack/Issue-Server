@@ -136,7 +136,7 @@ class Photo(Base):
                 return None
             self.image.generate_thumbnail(width=600)
             img = self.image.find_thumbnail(width=600)
-        return img.locate()
+        return img.locate().split('?', 1)[0]
 
     @property
     def likes_count(self):
