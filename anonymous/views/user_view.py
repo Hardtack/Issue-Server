@@ -1,6 +1,6 @@
 from .. import models as m
 from ..render import render
-from flask import Blueprint, g, request
+from flask import Blueprint, g, request, abort
 from flask.ext.router import Router
 from flask.ext.negotiation import provides
 from sqlalchemy import or_
@@ -27,6 +27,8 @@ def read_view(user_id):
 def create_view():
     username = request.form['username']
     password = request.form['password']
+    if not m.User.query.filter_by(username=username).first() is None:
+        abort(400)
     user = m.User(username=username, password=password)
     g.session.add(user)
     g.session.commit()

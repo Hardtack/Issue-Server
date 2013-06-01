@@ -61,3 +61,9 @@ def convert_dict(d):
 @converter.handle(list)
 def convert_list(li):
     return map(converter.convert, li)
+
+@converter.default
+def convert(obj):
+    if callable(getattr(obj, '__default__', None)):
+        return obj.__default__()
+    raise TypeError('Cannot convert object of ' + str(type(obj)))
