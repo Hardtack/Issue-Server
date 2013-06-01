@@ -9,6 +9,7 @@ requires = [
     'Flask-Admin>=1.0.1',
     'FormEncode-Jinja2',
     'wand',
+    'SQLAlchemy-ImageAttach==0.8.0.dev-20130531',
 ]
 
 setup(
@@ -24,8 +25,6 @@ setup(
     platforms='any',
     install_requires=requires,
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
-        'Intended Audience :: Developers',
     ],
 )
