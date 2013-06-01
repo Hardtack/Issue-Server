@@ -23,7 +23,7 @@ def get_login_user():
 def login_required(fn):
     @wraps(fn)
     def decorator(*args, **kwargs):
-        if getattr(g, 'user') is None:
+        if getattr(g, 'user', None) is None:
             abort(401)
         return fn(*args, **kwargs)
     return decorator
