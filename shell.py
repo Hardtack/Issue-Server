@@ -4,8 +4,8 @@ from flask import g
 from anonymous.app import create_app
 
 def shell():
-    session = m.Session()
     app = create_app({})
+    session = m.Session()
     env = {
         'app':app,
         'models':m,
