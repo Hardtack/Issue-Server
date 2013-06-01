@@ -56,6 +56,13 @@ def convert_datetime(date):
         'timestamp':timestamp(date),
     }
 
+@converter.handle(datetime.date)
+def convert_datetime(date):
+    return {
+        '__type__':'datetime',
+        'timestamp':timestamp(date),
+    }
+
 @converter.handle(dict)
 def convert_dict(d):
     converted = {}
