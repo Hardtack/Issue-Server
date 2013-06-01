@@ -17,7 +17,7 @@ class DeepConverter(Converter):
             for i in obj:
                 self.assert_type(i)
         elif isinstance(obj, dict):
-            for k, v in obj.iter_items():
+            for k, v in obj.iteritems():
                 self.assert_type(k)
                 self.assert_type(v)
 
@@ -55,7 +55,7 @@ def convert_datetime(date):
 @converter.handle(dict)
 def convert_dict(d):
     converted = {}
-    for k, v in d.iter_items():
+    for k, v in d.iteritems():
         converted[converter.convert(k)] = converter.convert(v)
     return converted
 
