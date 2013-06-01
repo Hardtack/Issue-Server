@@ -3,10 +3,12 @@ import sqlalchemy as s
 from sqlalchemy import func
 from sqlalchemy.orm import (validates, relationship, scoped_session,
     sessionmaker)
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.declarative import declarative_base
 from contrib.ext.sqlalchemy_ext import Query
 from sqlalchemy_imageattach.entity import Image, image_attachment
+
 
 Base = declarative_base()
 
@@ -125,7 +127,10 @@ class Photo(Base):
 
     @property
     def image_url(self):
-        img = self.image.find_thumbnail(width=600)
+        try:
+            img = self.image.find_thumbnail(width=600)
+        except NoResultFound:
+            img = None
         if img is None:
             if self.image.original is None:
                 return None
