@@ -21,7 +21,5 @@ dist
 *.tmp*
 *.swp
 .DS_Store
-auth_data
 _build
-url_info.plist
-lineclipper/media
+db.db

@@ -50,7 +50,7 @@ def create_app(config):
 
     # Admin
     def get_session():
-        session = getattr(self, '_session')
+        session = getattr(self, '_session', None)
         if (session is None) or not session.is_active:
             session = m.Session()
             setattr(self, '_session', session)

@@ -49,3 +49,8 @@ def login_view():
 def logout_view():
     logout(g.user)
     return render('Done', status=200)
+
+@auth_blueprint.route('/me')
+@login_required
+def me_view():
+    return render(g.user)
