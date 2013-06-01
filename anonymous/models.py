@@ -82,6 +82,8 @@ class User(Base):
 
     @property
     def image_url(self):
+        if self.image.original is None:
+            return None
         return self.image.locate()
 
 class UserImage(Base, Image):
@@ -122,6 +124,8 @@ class Photo(Base):
 
     @property
     def image_url(self):
+        if self.image.original is None:
+            return None
         return self.image.locate()
 
     @property
