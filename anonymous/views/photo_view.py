@@ -23,7 +23,7 @@ def read_view(photo_id):
         m.Photo.query.filter_by(id=photo_id).first_or_404()
     )
 
-@view_router('/issue/<int:issue_id>/photo/', methods=['DELETE'])
+@view_router('/issue/<int:issue_id>/photo/', methods=['POST'])
 @provides('application/json')
 @login_required
 def create_view(issue_id):

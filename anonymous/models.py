@@ -75,6 +75,7 @@ class User(Base):
         return self.password == make_password(password)
     
     image = image_attachment('UserImage')
+    created_at = s.Column(s.DateTime, nullable=False, default=func.now())
 
 class UserImage(Base, Image):
     __tablename__ = 'user_image'
@@ -93,6 +94,7 @@ class Issue(Base):
     description = s.Column(s.Text, nullable=False)
     start_date = s.Column(s.Date, nullable=False, default=func.now())
     end_date = s.Column(s.Date, nullable=True, default=None)
+    created_at = s.Column(s.DateTime, nullable=False, default=func.now())
 
 class Photo(Base):
     __tablename__ = 'photo'
@@ -107,6 +109,7 @@ class Photo(Base):
     issue = relationship('Issue', primaryjoin='Photo.issue_id==Issue.id')
 
     image = image_attachment('PhotoImage')
+    created_at = s.Column(s.DateTime, nullable=False, default=func.now())
 
 class PhotoImage(Base, Image):
     __tablename__ = 'photo_image'
@@ -128,6 +131,7 @@ class Comment(Base):
     photo = relationship('Photo', primaryjoin='Comment.photo_id==Photo.id')
 
     content = s.Column(s.Text, nullable=False)
+    created_at = s.Column(s.DateTime, nullable=False, default=func.now())
 
 class Like(Base):
     __tablename__ = 'like'
@@ -136,7 +140,7 @@ class Like(Base):
     user = relationship('User', primaryjoin='Like.user_id==User.id')
 
     photo_id = s.Column(s.Integer, s.ForeignKey('photo.id', ondelete='CASCADE'))
-    photo = relationship('Photo', primaryjoin='Like.photo_id==Photo.id')
+    photo = relationship('Photo', primaryjoin='Like.photo_id==Photo.id') 
 
 session_factory = sessionmaker(query_cls=Query)
 Session = scoped_session(session_factory)
