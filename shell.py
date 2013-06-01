@@ -4,7 +4,16 @@ from flask import g
 from anonymous.app import create_app
 
 def shell():
-    app = create_app({})
+    app = create_app({
+        'DEBUG':True,
+        'SECRET_KEY':'secret',
+        'DATABASE':{
+            'DB':'postgresql',
+            'DRIVER':'psycopg2',
+            'NAME':'postgres',
+            'USER':'postgres',
+        }
+    })
     session = m.Session()
     env = {
         'app':app,

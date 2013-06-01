@@ -9,6 +9,7 @@ requires = [
     'SQLAlchemy',
     'FormEncode-Jinja2',
     'wand',
+    'psycopg2',
     'SQLAlchemy-ImageAttach==0.8.0.dev-20130531',
 ]
 
