@@ -12,7 +12,7 @@ class ConvertEncoder(JSONEncoder):
 
 converter = Converter((list, dict, int, float, str, unicode))
 convert_encoder = ConvertEncoder(converter)
-render = Render(renderers=(JSONRenderer(encoder=convert_encoder)))
+render = Render(renderers=(JSONRenderer(encoder=convert_encoder),))
 
 @converter.handle(m.Base)
 def convert_model(model):
