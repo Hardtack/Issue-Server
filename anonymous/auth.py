@@ -37,7 +37,7 @@ def before_request():
 @auth_blueprint.route('/login', methods=['POST'])
 def login_view():
     username = request.form['username']
-    password = request.form['username']
+    password = request.form['password']
     user = authenticate(username, password)
     if user is None:
         abort(400)
