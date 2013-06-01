@@ -21,7 +21,7 @@ class DeepConverter(Converter):
                 self.assert_type(k)
                 self.assert_type(v)
 
-converter = DeepConverter((list, dict, int, float, str, unicode))
+converter = DeepConverter((list, dict, int, float, str, unicode, type(None)))
 convert_encoder = ConvertEncoder(converter)
 
 
