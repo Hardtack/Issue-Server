@@ -17,6 +17,9 @@ def make_password(raw):
 
 class User(Base):
     __tablename__ = 'user'
+    __with__ = ('image_url', )
+    __ex__ = ('password', )
+
     id = s.Column(s.Integer, primary_key=True)
 
     #username definitions
@@ -77,6 +80,10 @@ class User(Base):
     image = image_attachment('UserImage')
     created_at = s.Column(s.DateTime, nullable=False, default=func.now())
 
+    @property
+    def image_url(self):
+        return self.image.locate()
+
 class UserImage(Base, Image):
     __tablename__ = 'user_image'
     user_id = s.Column(s.Integer, s.ForeignKey('user.id'), primary_key=True)
@@ -88,6 +95,7 @@ class UserImage(Base, Image):
 
 class Issue(Base):
     __tablename__ = 'issue'
+    __with__ = ('writer', )
 
     id = s.Column(s.Integer, primary_key=True)
     title = s.Column(s.String(255), nullable=False)
@@ -98,6 +106,7 @@ class Issue(Base):
 
 class Photo(Base):
     __tablename__ = 'photo'
+    __with__ = ('image_url', 'writer', 'likes_count', 'comments_count')
 
     id = s.Column(s.Integer, primary_key=True)
     content = s.Column(s.Text, nullable=False)
@@ -110,6 +119,18 @@ class Photo(Base):
 
     image = image_attachment('PhotoImage')
     created_at = s.Column(s.DateTime, nullable=False, default=func.now())
+
+    @property
+    def image_url(self):
+        return self.image.locate()
+
+    @property
+    def likes_count(self):
+        return Like.query.filter_by(photo=self).count()
+
+    @property
+    def comments_count(self):
+        return Comment.query.filter_by(photo=self).count()
 
 class PhotoImage(Base, Image):
     __tablename__ = 'photo_image'

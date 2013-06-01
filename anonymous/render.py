@@ -36,8 +36,12 @@ def convert_model(model):
     d = {
         '__type__':'model.' + model.__class__.__name__,
     }
-    for column in model.__table__.columns:
-        attr = column.name
+    attrs = [x.name for x in model.__table__.columns]
+    withs = set(getattr(model, '__with__', ()))
+    exs = set(getattr(model, '__ex__', ()))
+    attrs |= withs
+    attrs -= exs
+    for attr in attrs:
         x = object()
         value = getattr(model, attr, x)
         if value is x:
