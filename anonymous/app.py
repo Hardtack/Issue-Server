@@ -2,8 +2,8 @@ import views
 import importlib
 import collections
 import models as m
-from auth import auth_blueprint
-from flask import Flask
+from auth import auth_blueprint, get_login_user
+from flask import Flask, g
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqlamodel import ModelView
 from contrib.utils.proxy import Proxy
@@ -44,6 +44,11 @@ def create_app(config):
 
     # Auth
     app.register_blueprint(auth_blueprint)
+
+    @app.before_request
+    def before_request():
+        g.user = get_login_user()
+
 
     # Middlewares
     SQLAlchemyMiddleware(m.Session, app)

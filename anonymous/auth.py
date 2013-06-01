@@ -18,6 +18,7 @@ def logout(user):
 
 def get_login_user():
     user_id = session.get('user_id', None)
+    print user_id
     return m.User.query.filter_by(id=user_id).first()
 
 def login_required(fn):
@@ -29,10 +30,6 @@ def login_required(fn):
     return decorator
 
 auth_blueprint = Blueprint('auth', __name__)
-
-@auth_blueprint.before_request
-def before_request():
-    g.user = get_login_user()
 
 @auth_blueprint.route('/login', methods=['POST'])
 def login_view():
