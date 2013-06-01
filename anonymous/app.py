@@ -9,6 +9,7 @@ from flask.ext.admin.contrib.sqlamodel import ModelView
 from contrib.utils.proxy import Proxy
 from contrib.ext.sqlalchemy_ext import create_engine
 from contrib.middlewares.sqlalchemymiddleware import SQLAlchemyMiddleware
+from sqlalchemy_imageattach import context
 from sqlalchemy_imageattach.stores.fs import HttpExposedFileSystemStore
 
 class App(Flask):
@@ -41,6 +42,13 @@ def create_app(config):
     # Image Store
     app.store = HttpExposedFileSystemStore('images', 'images/')
     app.wsgi_app = app.store.wsgi_middleware(app.wsgi_app)
+    @app.before_request
+    def store_before_request():
+        context.push_store_context(app.store)
+
+    @app.teardown_request
+    def store_teardown_request():
+        context.pop_store_context()
 
     # Auth
     app.register_blueprint(auth_blueprint)

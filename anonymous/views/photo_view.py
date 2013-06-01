@@ -1,10 +1,9 @@
 from .. import models as m
 from ..auth import login_required
 from ..render import render
-from flask import Blueprint, g, request, current_app as app
+from flask import Blueprint, g, request
 from flask.ext.router import Router
 from flask.ext.negotiation import provides
-from sqlalchemy_imageattach.context import store_context
 
 photo_blueprint = Blueprint('photo', __name__)
 view_router = Router(photo_blueprint, 'view')
@@ -33,8 +32,7 @@ def create_view(issue_id):
     image = request.files['image']
     content = request.form['content']
     photo = m.Photo(writer=g.user, content=content, issue=issue)
-    with store_context(app.store):
-        photo.image.from_file(image)
+    photo.image.from_file(image)
     return render(photo, status=201)
 
 @view_router('/photo/<int:photo_id>', methods=['DELETE'])
