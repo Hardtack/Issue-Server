@@ -138,7 +138,6 @@ class Photo(Base):
 
 class PhotoImage(Base, Image):
     __tablename__ = 'photo_image'
-    id = s.Column(s.Integer, primary_key=True)
     photo_id = s.Column(s.Integer, s.ForeignKey('photo.id'), primary_key=True)
     photo = relationship('Photo', primaryjoin='PhotoImage.photo_id==Photo.id')
 
