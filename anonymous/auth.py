@@ -4,7 +4,7 @@ from flask import session, g, Blueprint, abort, request
 from render import render
 
 def authenticate(username, password):
-    user = m.User.filter_by(username=username).first()
+    user = m.User.query.filter_by(username=username).first()
     if user is None and not user.check_password(password):
         return None
     return user
