@@ -25,7 +25,7 @@ def create_app(config):
     app = App(__name__)
 
     # Configure application
-    app.config.setdefault('DB', 'db.db')
+    app.config.setdefault('DATABASE', 'db.db')
     if isinstance(config, collections.Mapping):
         app.config.update(config)
     else:
