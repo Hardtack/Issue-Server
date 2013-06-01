@@ -3,10 +3,6 @@ import collections
 import models as m
 from flask import Flask
 from contrib.ext.sqlalchemy_ext import create_engine
-from contrib.middlewares.babelmiddleware import BabelMiddleware
-from contrib.middlewares.contentnegotiationmiddleware import (
-    ContentNegotiationMiddleware)
-from contrib.middlewares.sessionmiddleware import SessionMiddleware
 from contrib.middlewares.sqlalchemymiddleware import SQLAlchemyMiddleware
 
 class App(Flask):
@@ -36,6 +32,4 @@ def create_app(config):
 
     # Middlewares
     SQLAlchemyMiddleware(m.Session, app)
-    ContentNegotiationMiddleware(app)
-    BabelMiddleware(app)
     return app

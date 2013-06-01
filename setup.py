@@ -6,7 +6,6 @@ requires = [
     'Flask-Router',
     'Flask-Negotiation',
     'SQLAlchemy',
-    'Flask-Admin>=1.0.1',
     'FormEncode-Jinja2',
     'wand',
     'SQLAlchemy-ImageAttach==0.8.0.dev-20130531',
