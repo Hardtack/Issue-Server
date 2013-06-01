@@ -47,7 +47,7 @@ def create_app(config):
         context.push_store_context(app.store)
 
     @app.teardown_request
-    def store_teardown_request():
+    def store_teardown_request(exception=None):
         context.pop_store_context()
 
     # Auth
