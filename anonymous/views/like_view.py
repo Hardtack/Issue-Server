@@ -29,6 +29,9 @@ def read_view(like_id):
 @login_required
 def create_view(photo_id):
     photo = m.Photo.query.filter_by(id=photo_id).first_or_404()
+    like = m.Like.query.filter_by(user=g.user, photo=photo).first()
+    if not like is None:
+        return render(like, status=200)
     like = m.Like(user=g.user, photo=photo)
     g.session.add(like)
     g.session.commit()
