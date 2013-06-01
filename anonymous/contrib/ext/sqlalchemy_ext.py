@@ -12,7 +12,7 @@ def engine_url(db_info):
         db_url_li.append(db_info['USER'])
         if db_info.get('PASSWORD', None):
             db_url_li.append(':%s'%db_info['PASSWORD'])
-        host = db_info['HOST'] or 'localhost'
+        host = db_info.get('HOST', None) or 'localhost'
         db_url_li.append('@%s'%host)
         if db_info.get('PORT', None):
             db_url_li.append(':%s'%db_info['PORT'])
