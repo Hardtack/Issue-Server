@@ -12,7 +12,7 @@ view_router = Router(comment_blueprint, 'view')
 @provides('application/json')
 def view(photo_id):
     return render(
-        m.Comment.query.fiter_by(
+        m.Comment.query.filter_by(
             photo=m.Photo.query.filter_by(id=photo_id).first_or_404()
         ).order_by(m.Comment.created_at).all()
     )
