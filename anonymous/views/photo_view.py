@@ -33,6 +33,7 @@ def create_view(issue_id):
     content = request.form['content']
     photo = m.Photo(writer=g.user, content=content, issue=issue)
     photo.image.from_file(image)
+    photo.image.generate_thumbnail(width=600)
     g.session.add(photo)
     g.session.commit()
     return render(photo, status=201)

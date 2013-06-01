@@ -125,9 +125,13 @@ class Photo(Base):
 
     @property
     def image_url(self):
-        if self.image.original is None:
-            return None
-        return self.image.locate()
+        img = self.image.find_thumbnail(width=600)
+        if img is None:
+            if self.image.original is None:
+                return None
+            self.image.generate_thumbnail(width=600)
+            img = self.image.find_thumbnail(width=600)
+        return img.locate()
 
     @property
     def likes_count(self):
