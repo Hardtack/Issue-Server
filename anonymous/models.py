@@ -144,6 +144,7 @@ class PhotoImage(Base, Image):
 
 class Comment(Base):
     __tablename__ = 'comment'
+    __with__ = ('writer', )
     id = s.Column(s.Integer, primary_key=True)
     writer_id = s.Column(s.Integer, s.ForeignKey('user.id', ondelete='CASCADE'))
     writer = relationship('User', primaryjoin='Comment.writer_id==User.id')

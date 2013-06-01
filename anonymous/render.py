@@ -36,7 +36,7 @@ def convert_model(model):
     d = {
         '__type__':'model.' + model.__class__.__name__,
     }
-    attrs = [x.name for x in model.__table__.columns]
+    attrs = set([x.name for x in model.__table__.columns])
     withs = set(getattr(model, '__with__', ()))
     exs = set(getattr(model, '__ex__', ()))
     attrs |= withs
