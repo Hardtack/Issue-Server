@@ -88,7 +88,8 @@ class User(Base):
 
 class UserImage(Base, Image):
     __tablename__ = 'user_image'
-    user_id = s.Column(s.Integer, s.ForeignKey('user.id'), primary_key=True)
+    user_id = s.Column(s.Integer, s.ForeignKey('user.id', ondelete='CASCADE'),
+        primary_key=True)
     user = relationship('User', primaryjoin='UserImage.user_id==User.id')
 
     @property
@@ -138,7 +139,8 @@ class Photo(Base):
 
 class PhotoImage(Base, Image):
     __tablename__ = 'photo_image'
-    photo_id = s.Column(s.Integer, s.ForeignKey('photo.id'), primary_key=True)
+    photo_id = s.Column(s.Integer, s.ForeignKey('photo.id', ondelete='CASCADE'),
+        primary_key=True)
     photo = relationship('Photo', primaryjoin='PhotoImage.photo_id==Photo.id')
 
     @property
