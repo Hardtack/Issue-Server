@@ -11,7 +11,11 @@ view_router = Router(comment_blueprint, 'view')
 @view_router('/photo/<int:photo_id>/comment/', methods=['GET'])
 @provides('application/json')
 def view(photo_id):
-    pass
+    return render(
+        m.Comment.query.fiter_by(
+            photo=m.Photo.query.filter_by(id=photo_id).first_or_404()
+        ).all()
+    )
 
 @view_router('/comment/<int:comment_id>', methods=['GET'])
 @provides('application/json')
