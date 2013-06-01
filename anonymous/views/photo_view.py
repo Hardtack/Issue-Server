@@ -13,7 +13,9 @@ view_router = Router(photo_blueprint, 'view')
 @provides('application/json')
 def view(issue_id):
     issue = m.Issue.query.filter_by(id=issue_id).first_or_404()
-    photos = m.Photo.query.filter_by(issue_id=issue.id).all()
+    photos = m.Photo.query.filter_by(
+        issue_id=issue.id
+    ).order_by(m.Photo.created_at).all()
     return render(photos)
 
 @view_router('/photo/<int:photo_id>', methods=['GET'])

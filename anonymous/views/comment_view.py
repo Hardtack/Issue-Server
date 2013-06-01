@@ -14,7 +14,7 @@ def view(photo_id):
     return render(
         m.Comment.query.fiter_by(
             photo=m.Photo.query.filter_by(id=photo_id).first_or_404()
-        ).all()
+        ).order_by(m.Comment.created_at).all()
     )
 
 @view_router('/comment/<int:comment_id>', methods=['GET'])
