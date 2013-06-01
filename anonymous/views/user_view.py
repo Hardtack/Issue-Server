@@ -24,6 +24,7 @@ def read_view(user_id):
     ).first_or_404())
 
 @view_router('/user/', methods=['POST'])
+@provides('application/json')
 def create_view():
     username = request.form['username']
     password = request.form['password']
@@ -35,6 +36,7 @@ def create_view():
     return render(user)
 
 @view_router('/user/<user_id>', methods=['DELETE'])
+@provides('application/json')
 def delete_view(user_id):
     user = m.User.query.filter(
         or_(

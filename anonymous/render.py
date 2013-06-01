@@ -26,6 +26,7 @@ convert_encoder = ConvertEncoder(converter)
 
 
 class ConvertJSONRenderer(Renderer):
+    __media_types__ = ('application/json', )
     def render(self, data, template=None, ctx=None):
         return convert_encoder.encode({'data':data})
 render = Render(renderers=(ConvertJSONRenderer(), ))

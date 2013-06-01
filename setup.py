@@ -5,6 +5,7 @@ requires = [
     'Flask>=0.9',
     'Flask-Router',
     'Flask-Negotiation',
+    'Flask-Admin',
     'SQLAlchemy',
     'FormEncode-Jinja2',
     'wand',
