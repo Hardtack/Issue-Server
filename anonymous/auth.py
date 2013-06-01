@@ -18,7 +18,12 @@ def logout(user):
 
 def get_login_user():
     user_id = session.get('user_id', None)
-    return m.User.query.filter_by(id=user_id).first()
+    if user_id:
+        return m.User.query.filter_by(id=user_id).first()
+    auth = request.authorization
+    if auth:
+        return authenticate(auth.username, auth.password)
+    return None
 
 def login_required(fn):
     @wraps(fn)
